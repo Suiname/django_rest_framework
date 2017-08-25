@@ -47,3 +47,11 @@ class Feeding(models.Model):
 
     class Meta:
         ordering = ('created',)
+
+class Discharge(models.Model):
+    created = models.DateTimeField('Date', default=timezone.now)
+    poop = models.BooleanField('Poop')
+    pee = models.BooleanField('Urine')
+
+    class Meta:
+        ordering = ('created',)
