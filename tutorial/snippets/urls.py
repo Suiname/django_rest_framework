@@ -7,6 +7,7 @@ from rest_framework.schemas import get_schema_view
 router = DefaultRouter()
 router.register(r'snippets', views.SnippetViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'feedings', views.FeedingViewSet)
 schema_view = get_schema_view(title='Pastebin API')
 
 # The API URLs are now determined automatically by the router.

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer, UserSerializer
+from snippets.models import Snippet, Feeding
+from snippets.serializers import SnippetSerializer, UserSerializer, FeedingSerializer
 from rest_framework import generics, permissions, renderers, viewsets
 from django.contrib.auth.models import User
 from snippets.permissions import IsOwnerOrReadOnly
@@ -37,3 +37,12 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class FeedingViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+    """
+    queryset = Feeding.objects.all()
+    serializer_class = FeedingSerializer
+    

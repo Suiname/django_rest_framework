@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES, Feeding
 from django.contrib.auth.models import User
 
 class SnippetSerializer(serializers.HyperlinkedModelSerializer):
@@ -17,3 +17,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'id', 'username', 'snippets')
+
+class FeedingSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Feeding
+        fields = ('created', 'left', 'right', 'pumped', 'formula')
