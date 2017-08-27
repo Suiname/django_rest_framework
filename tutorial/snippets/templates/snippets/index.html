@@ -1,7 +1,7 @@
 {% if tracker_list %}
-<h1> Ray Tracker </h1>
 <div class="mdl-grid">
-<table class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col mdl-cell--12-col-phone mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+<h1 class="mdl-cell mdl-cell--3-offset mdl-cell--6-col" style="text-align: center;">Ray Tracker </h1>        
+<table class="mdl-cell mdl-cell--1-offset-desktop mdl-cell--10-col mdl-cell--12-col-phone mdl-data-table mdl-js-data-table mdl-shadow--2dp rayTable">
     <thead>
       <tr>
         <th>Date</th>
@@ -24,8 +24,18 @@
     <td><a href="/discharge/{{ event.id }}/">{{ event.poop }}</a></td>    
     <td><a href="/discharge/{{ event.id }}/">{{ event.pee }}</a></td>
 </tr>
-</div>
 {% endfor %}
+    </tbody>
+</table>
+<div class="mdl-cell mdl-cell--4-offset mdl-cell--4-col">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="float: left;">
+                Feeding
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="float: right;">
+                Discharge
+        </button>
+</div>
+</div>
 {% else %}
 <p>Ray hasn't done anything.</p>
 {% endif %}

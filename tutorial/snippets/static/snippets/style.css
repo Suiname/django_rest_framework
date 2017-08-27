@@ -9,3 +9,11 @@
     height: 150px;
     margin: auto;
 }
+
+.rayTable tr th {
+    text-align: center;
+}
+
+.rayTable tr td {
+    text-align: center;
+}
