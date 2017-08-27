@@ -1,0 +1,11 @@
+.eventList {
+    display: flex;
+    flex-flow: row wrap;
+    height: 200 px;
+    justify-content: space-around;
+}
+
+.event {
+    height: 150px;
+    margin: auto;
+}

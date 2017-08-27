@@ -9,8 +9,26 @@ from snippets.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from django.views import generic
+from itertools import chain
+from operator import attrgetter
 
 # Create your views here.
+
+class IndexView(generic.ListView):
+    template_name = 'snippets/index.html'
+    context_object_name = 'tracker_list'
+
+    def get_queryset(self):
+        """
+        Return the last five published questions (not including those set to be
+        published in the future).
+        """
+        result_list = sorted(
+            chain(Discharge.objects.all(), Feeding.objects.all()),
+            key=attrgetter('created'))
+        return result_list
+
 class SnippetViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
