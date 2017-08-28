@@ -1,26 +1,27 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--2-offset mdl-cell--8-col">
-    <form id='feedingForm'>
+    <form id='feedingForm' method="">
+      {% csrf_token %}
       <div class="mdl-cell--2-offset mdl-cell--8-col">
         <label class="mdl-cell mdl-cell--1-col" for="created">
             <i class="material-icons">date_range</i>
         </label>
-        <input class="mdl-cell mdl-cell--11-col" type="datetime-local" id="created">
+        <input class="mdl-cell mdl-cell--11-col" type="datetime-local" id="created" name="created">
       </div>
       <div class="mdl-textfield mdl-js-textfield mdl-cell--6-col">
-        <input class="mdl-textfield__input" type="text" id="left">
+        <input class="mdl-textfield__input" type="number" id="left" name="left">
         <label class="mdl-textfield__label" for="left">Left Breast minutes</label>
       </div>
       <div class="mdl-textfield mdl-js-textfield mdl-cell--6-col">
-        <input class="mdl-textfield__input" type="text" id="right">
+        <input class="mdl-textfield__input" type="number" id="right" name="right">
         <label class="mdl-textfield__label" for="right">Right Breast minutes</label>
       </div>
       <div class="mdl-textfield mdl-js-textfield mdl-cell--6-col">
-        <input class="mdl-textfield__input" type="text" id="pumped">
+        <input class="mdl-textfield__input" type="number" id="pumped" name="pumped">
         <label class="mdl-textfield__label" for="pumped">Pumped Breastmilk in mL</label>
       </div>
       <div class="mdl-textfield mdl-js-textfield mdl-cell--6-col">
-        <input class="mdl-textfield__input" type="text" id="formula">
+        <input class="mdl-textfield__input" type="number" id="formula" name="formula">
         <label class="mdl-textfield__label" for="formula">Formula in mL</label>
       </div>
       <div class="mdl-cell mdl-cell--12-col">
@@ -39,7 +40,8 @@
 <script type="text/javascript">
 function onClick(event) {
   event.preventDefault();
-  var serializedForm = $('#feedingForm').serialize();
+  console.log('jquery: ', $('#feedingForm'));
+  var serializedForm = $('input').serializeArray();
   console.log('serialized form: ', serializedForm);
   $.ajax({
     url: '/feedings/',
