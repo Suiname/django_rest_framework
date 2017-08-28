@@ -28,7 +28,7 @@ class IndexView(generic.ListView):
         result_list = sorted(
             chain(Discharge.objects.all(), Feeding.objects.all()),
             key=attrgetter('created'))
-        return result_list
+        return result_list[-5:]
 
 class FeedingFormView(CreateView):
     template_name = 'snippets/feeding.html'
