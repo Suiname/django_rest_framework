@@ -10,6 +10,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from django.views import generic
+from django.views.generic.edit import CreateView
 from itertools import chain
 from operator import attrgetter
 
@@ -28,6 +29,12 @@ class IndexView(generic.ListView):
             chain(Discharge.objects.all(), Feeding.objects.all()),
             key=attrgetter('created'))
         return result_list
+
+class FeedingFormView(CreateView):
+    template_name = 'snippets/feeding.html'
+    success_url = '/'
+    model = Feeding
+    fields = ['created', 'left', 'right', 'pumped', 'formula']
 
 class SnippetViewSet(viewsets.ModelViewSet):
     """
