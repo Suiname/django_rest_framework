@@ -1,6 +1,6 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--2-offset mdl-cell--8-col">
-    <form id='feedingForm' method="">
+    <form id='feedingForm'>
       {% csrf_token %}
       <div class="mdl-cell--2-offset mdl-cell--8-col">
         <label class="mdl-cell mdl-cell--1-col" for="created">
@@ -28,7 +28,14 @@
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="onClick(event)">Submit</button>
       </div>
     </form>
+    <div id="confirmationDialog" class="mdl-cell mdl-cell--12-col" style="display: none; height: 80%;">
+      <a href="/newFeeding"><button class="mdl-cell mdl-cell--2-col mdl-cell--2-offset mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Another</button></a>
+      <a href="/"><button class="mdl-cell mdl-cell--2-col mdl-cell--2-offset mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Go Back</button></a>
+    </div>
   </div>
+</div>
+<div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text"></div>
 </div>
 {% load static %}
 
@@ -40,19 +47,20 @@
 <script type="text/javascript">
 function onClick(event) {
   event.preventDefault();
-  console.log('jquery: ', $('#feedingForm'));
   var serializedForm = $('input').serializeArray();
-  console.log('serialized form: ', serializedForm);
   $.ajax({
     url: '/feedings/',
     method: 'POST',
     data: serializedForm,
   })
   .done(function(data) {
-    console.log(data);
+    $('#feedingForm').hide();
+    $('#confirmationDialog').show();
   })
   .fail(function(error) {
-    console.log('error: ', error.message);
+    console.log('error: ', error);
+    var snackbar = $('#snackbar')[0];
+    snackbar.MaterialSnackbar.showSnackbar({message: error.responseJSON.detail});
   });
 }
 </script>
